@@ -32,7 +32,7 @@ public class LogInController {
         }
 
         if (user.getPassword().equals(credentials.get().getPassword())){
-            return tokenGenerator.get(user);
+            return tokenGenerator.get(credentials.get());
 
         }else {
             return "Incorrect password";

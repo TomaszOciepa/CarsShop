@@ -20,10 +20,10 @@ public class Start {
 
     @EventListener(ApplicationReadyEvent.class)
     public void run(){
-        User user = new User("user", "user123", Role.USER);
+        User user = new User("user", "user123", "USER");
         userRepository.save(user);
 
-        User admin = new User("admin", "admin123", Role.ADMIN);
+        User admin = new User("admin", "admin123", "ADMIN");
         userRepository.save(admin);
 
         Car car1 = new Car("BMW", "X5", 200500);

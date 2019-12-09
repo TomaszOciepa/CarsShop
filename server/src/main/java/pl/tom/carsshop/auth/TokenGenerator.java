@@ -15,10 +15,11 @@ public class TokenGenerator {
 
         return Jwts.builder()
                 .setSubject(user.getUsername())
-                .claim("roles", user.getRole())
+                .claim("password", user.getPassword())
+                .claim("role", user.getRole())
                 .setIssuedAt(new Date(currentTimeMillis))
                 .setExpiration(new Date(currentTimeMillis + 60000))
-                .signWith(SignatureAlgorithm.HS512, "c=ssTY}wf@u.0qp")
+                .signWith(SignatureAlgorithm.HS512, "BS*z_=D8{(o%{*X")
                 .compact();
     }
 

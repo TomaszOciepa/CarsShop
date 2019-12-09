@@ -3,10 +3,7 @@ package pl.tom.carsshop.manager;
 import org.springframework.stereotype.Service;
 import pl.tom.carsshop.model.User;
 import pl.tom.carsshop.model.UserRepository;
-
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserManager {

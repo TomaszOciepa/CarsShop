@@ -21,6 +21,11 @@ public class CarController {
         return "TEST is working";
     }
 
+    @RequestMapping("/test2")
+    public String test2(){
+        return "TEST 22 2222 is working ADMIN!!!!";
+    }
+
     @RequestMapping("/cars")
     public List<Car> getCars(){
         return carRepository.findAll();
