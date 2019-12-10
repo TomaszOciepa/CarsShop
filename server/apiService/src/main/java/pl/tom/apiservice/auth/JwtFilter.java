@@ -30,9 +30,13 @@ public class JwtFilter extends BasicAuthenticationFilter {
         String header = request.getHeader("Authorization");
 
         if (header != null) {
-            UsernamePasswordAuthenticationToken authResult = getAuthenticationByToken(header);
-            SecurityContextHolder.getContext().setAuthentication(authResult);
-            chain.doFilter(request, response);
+            try {
+                UsernamePasswordAuthenticationToken authResult = getAuthenticationByToken(header);
+                SecurityContextHolder.getContext().setAuthentication(authResult);
+                chain.doFilter(request, response);
+            } catch (Exception e){
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            }
         }else {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         }

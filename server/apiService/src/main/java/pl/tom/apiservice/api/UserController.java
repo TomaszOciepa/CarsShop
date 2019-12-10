@@ -19,6 +19,11 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/{id}")
+    public Optional<User> findById(@PathVariable(value = "id") Long id){
+        return userService.findById(id);
+    }
+
     @GetMapping("/all")
     public List<User> getAll() {
         return userService.findAll();
@@ -49,5 +54,31 @@ public class UserController {
             return "brak użytkownika lub za krótkie hasło";
         }
     }
+
+    @PutMapping("/update/role/{id}")
+    public String updateRole(@PathVariable(value = "id") Long id, @RequestBody User update) {
+
+        if (update.getRole().equals("ADMIN") || update.getRole().equals("USER") && userService.findById(id).isPresent()) {
+            Optional<User> user = userService.findById(id);
+            user.get().setRole(update.getRole());
+            userService.update(user.get());
+            return "Updated Role";
+        } else {
+            return "brak użytkownika lub niepoprawna ROLA";
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteById(@PathVariable(value = "id") Long id){
+
+        if (userService.findById(id).isPresent()){
+            userService.deleteById(id);
+            return "Delete user";
+        }else {
+            return "user does not exist";
+        }
+    }
+
+
 
 }

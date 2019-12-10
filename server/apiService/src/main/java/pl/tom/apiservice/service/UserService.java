@@ -29,4 +29,8 @@ public class UserService {
         user.setUsername(user.getUsername().toLowerCase());
         userRepository.save(user);
     }
+
+    public void deleteById(Long id){
+        userRepository.deleteById(id);
+    }
 }
