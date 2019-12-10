@@ -17,7 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/delete/{id}").hasRole("ADMIN")
                 .antMatchers( "/user/{id}").hasRole("ADMIN")
                 .antMatchers("/user/all").hasRole("ADMIN")
-                .antMatchers("/cars").hasRole("USER")
+                .antMatchers("/car/*").hasRole("ADMIN")
                 .and()
                 .addFilter(new JwtFilter(authenticationManager()));
 

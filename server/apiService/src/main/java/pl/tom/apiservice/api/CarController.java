@@ -1,23 +1,66 @@
 package pl.tom.apiservice.api;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import pl.tom.apiservice.model.Car;
-import pl.tom.apiservice.model.CarRepository;
+import pl.tom.apiservice.service.CarService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/car")
 public class CarController {
 
-    private CarRepository carRepository;
+    private CarService carService;
 
-    public CarController(CarRepository carRepository) {
-        this.carRepository = carRepository;
+    @Autowired
+    public CarController(CarService carService) {
+        this.carService = carService;
     }
 
-    @RequestMapping("/cars")
+    @GetMapping("/all")
     public List<Car> getCars() {
-        return carRepository.findAll();
+        return carService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Car> getById(@PathVariable(value = "id") Long id){
+        return carService.findById(id);
+    }
+
+    @PostMapping("/new")
+    public String create(@RequestBody Car car){
+        if (car.getMark().length() >= 3 && car.getModel().length() >= 2 && car.getPrice() > 0){
+            carService.save(car);
+            return "create new car";
+        }else {
+            return "Wrong data!";
+        }
+    }
+
+    @PutMapping("/update/{id}")
+    public String update(@PathVariable(value = "id") Long id, @RequestBody Car carUpdate){
+        Optional<Car> car = carService.findById(id);
+        if (car.isPresent()){
+            car.get().setMark(carUpdate.getMark());
+            car.get().setModel(carUpdate.getModel());
+            car.get().setPrice(carUpdate.getPrice());
+            carService.save(car.get());
+            return "Car is updated";
+        }else {
+            return "car does not exist";
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable(value = "id") Long id){
+        if (carService.findById(id).isPresent()){
+            carService.deleteById(id);
+            return "Car is deleted";
+        }else {
+            return "car does not exist";
+        }
+
     }
 }
