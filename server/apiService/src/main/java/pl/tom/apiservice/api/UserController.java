@@ -29,7 +29,7 @@ public class UserController {
         return userService.findAll();
     }
 
-    @PutMapping("/update/name/{id}")
+    @PutMapping("/name/{id}")
     public String updateName(@PathVariable(value = "id") Long id, @RequestBody User update) {
 
         if (update.getUsername().length() >= 3 && userService.findById(id).isPresent()) {
@@ -42,7 +42,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/update/password/{id}")
+    @PutMapping("/password/{id}")
     public String updatePassword(@PathVariable(value = "id") Long id, @RequestBody User update) {
 
         if (update.getPassword().length() >= 6 && userService.findById(id).isPresent()) {
@@ -55,7 +55,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/update/role/{id}")
+    @PutMapping("/role/{id}")
     public String updateRole(@PathVariable(value = "id") Long id, @RequestBody User update) {
 
         if (update.getRole().equals("ADMIN") || update.getRole().equals("USER") && userService.findById(id).isPresent()) {
@@ -68,7 +68,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public String deleteById(@PathVariable(value = "id") Long id){
 
         if (userService.findById(id).isPresent()){

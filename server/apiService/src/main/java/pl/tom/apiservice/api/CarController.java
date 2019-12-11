@@ -29,7 +29,7 @@ public class CarController {
         return carService.findById(id);
     }
 
-    @PostMapping("/new")
+    @PostMapping("/")
     public String create(@RequestBody Car car){
         if (car.getMark().length() >= 3 && car.getModel().length() >= 2 && car.getPrice() > 0){
             carService.save(car);
@@ -39,7 +39,7 @@ public class CarController {
         }
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public String update(@PathVariable(value = "id") Long id, @RequestBody Car carUpdate){
         Optional<Car> car = carService.findById(id);
         if (car.isPresent()){
@@ -53,7 +53,7 @@ public class CarController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable(value = "id") Long id){
         if (carService.findById(id).isPresent()){
             carService.deleteById(id);

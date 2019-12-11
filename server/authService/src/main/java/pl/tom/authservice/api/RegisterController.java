@@ -22,8 +22,13 @@ public class RegisterController {
         if (userService.usernameExists(user)) {
             return "username is taken";
         } else {
-            userService.save(user);
-            return "user account created";
+
+            if(user.getUsername().length() < 3 || user.getPassword().length() < 6){
+                return "required: username min 3 char and password min 6 char";
+            }else {
+                userService.save(user);
+                return "user account created";
+            }
         }
     }
 }
