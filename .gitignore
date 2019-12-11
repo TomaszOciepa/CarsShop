@@ -51,8 +51,7 @@ bazaDanych.mv.db
 # Only exists if Bazel was run
 /bazel-out
 
-# dependencies
-/node_modules
+
 
 # profiling files
 chrome-profiler-events*.json
