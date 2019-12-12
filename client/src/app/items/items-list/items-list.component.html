@@ -1,0 +1,10 @@
+
+
+
+<div class="list-group">
+    <div class="list-group-item" *ngFor="let item of items">
+        {{item.name}}
+    </div>
+</div>
+
+<input class="form-control" (keyup.enter)="items.push({name:$event.target.value})">
