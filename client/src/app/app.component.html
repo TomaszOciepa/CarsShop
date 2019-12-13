@@ -2,15 +2,19 @@
 <div class="container">
     <h1>{{title}}</h1>
 
-
-    <button class="btn btn-danger" (click)="hide = !hide">Toogle</button>
-    <br>
-    <br>
-    <app-items-list *ngIf="!hide"></app-items-list>
-    <!-- <br>
-    <br>
-    <app-items-list *ngIf="!hide"></app-items-list>
-    <router-outlet></router-outlet> -->
+    <div class="row">
+         <div class="col">
+            <button class="btn btn-danger" (click)="hide = !hide">Toogle</button>
+            <app-items-list *ngIf="!hide"></app-items-list>
+        </div>
+        <div class="col">
+            <button class="btn btn-danger" (click)="hide2 = !hide2">Toogle</button>
+            <app-items-list *ngIf="!hide2"></app-items-list>
+        </div>
+    </div>
+    
+    
+    <!-- <router-outlet></router-outlet> -->
 </div>
 
 
