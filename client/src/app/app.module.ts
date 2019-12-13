@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ItemsModule } from './items/items.module';
 import { SelectionModule } from './selection/selection.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import { SelectionModule } from './selection/selection.module';
     BrowserModule,
     AppRoutingModule,
     ItemsModule.forRoot(),
-    SelectionModule
+    SharedModule
   ],
   providers: [
     

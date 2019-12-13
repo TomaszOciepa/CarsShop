@@ -1,4 +1,4 @@
-import { Directive, HostListener, Input, HostBinding } from '@angular/core';
+import { Directive, HostListener, Input, HostBinding, Host } from '@angular/core';
 import { SelectionService } from './selection.service';
 
 @Directive({
