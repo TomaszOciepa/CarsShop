@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ItemsModule } from './items/items.module';
+import { SelectionModule } from './selection/selection.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { ItemsModule } from './items/items.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ItemsModule.forRoot()
+    ItemsModule.forRoot(),
+    SelectionModule
   ],
   providers: [
     

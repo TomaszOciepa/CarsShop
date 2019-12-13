@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ItemsComponent } from './items.component';
 import { ItemsListComponent } from './items-list/items-list.component';
 import { ItemsDataService } from './items-data.service';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -12,7 +13,8 @@ import { ItemsDataService } from './items-data.service';
     ItemsListComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ],
   exports: [
     ItemsComponent,
