@@ -3,22 +3,20 @@ import { ProfileService } from '../profile.service';
 import { City } from '../models/city'
 
 @Component({
-  selector: 'profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'profile-bar',
+  templateUrl: './profile-bar.component.html',
+  styleUrls: ['./profile-bar.component.css']
 })
-export class ProfileComponent implements OnInit {
-
+export class ProfileBarComponent implements OnInit {
 
   profile:City
 
   constructor(private profileService:ProfileService) { }
 
   ngOnInit() {
-
     this.profileService.getCity().subscribe(city =>{
-     this.profile = city
-    }) 
+      this.profile = city
+     }) 
   }
 
 }

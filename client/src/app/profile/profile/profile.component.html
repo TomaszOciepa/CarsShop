@@ -1,9 +1,15 @@
 
 <div *ngIf="profile">
     <h2>City</h2>
-    <p>id: {{profile.id}}</p>
-    <p>name: {{profile.name}}</p>
-    <p>timezone: {{profile.timezone}}</p>
-    <p>cod: {{profile.cod}}</p>
+    <dl class="row">
+        <dt class="col-3">Name</dt>
+        <dd class="col-9">{{profile.name}}</dd>
+        <dt class="col-3">id</dt>
+        <dd class="col-9">{{profile.id}}</dd>
+        <dt class="col-3">timezone</dt>
+        <dd class="col-9">{{profile.timezone}}</dd>
+        <dt class="col-3">cod</dt>
+        <dd class="col-9">{{profile.cod}}</dd>
+    </dl>
 </div>
 

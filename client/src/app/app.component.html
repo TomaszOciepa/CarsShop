@@ -1,14 +1,22 @@
 
+
+<nav class="navbar navbar-light bg-light justify-content-between">
+    <div class="container">
+        <a class="navbar-brand">{{title}}</a>
+        <span class="navbar-text">
+            <profile-bar></profile-bar>
+        </span>
+    </div>
+</nav>
+
+
+
 <div class="container">
-    <h1>{{ title }} app is running!</h1>
-       
-    
-
-
-    <profile></profile>
-
-
-
-    <router-outlet></router-outlet>
+    <div class="row">
+        <div class="col pt-4">
+            <profile></profile>
+        </div>
+    </div>
 </div>
 
+<router-outlet></router-outlet>

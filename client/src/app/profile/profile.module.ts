@@ -3,16 +3,17 @@ import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileService } from './profile.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ProfileBarComponent } from './profile-bar/profile-bar.component';
 
 
 
 @NgModule({
-  declarations: [ProfileComponent],
+  declarations: [ProfileComponent, ProfileBarComponent],
   imports: [
     CommonModule,
     HttpClientModule
   ],
-  exports: [ProfileComponent],
+  exports: [ProfileComponent, ProfileBarComponent],
   providers:[
     ProfileService
   ]
