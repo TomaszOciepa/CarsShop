@@ -15,7 +15,7 @@
               </li>
           </ul>
         </div>
-        <span class="navbar-text"  *ngIf="!profile">
+        <span class="navbar-text"  *ngIf="profile">
           <profile-bar></profile-bar>
         </span>
     </div>
@@ -29,7 +29,7 @@
         <profile></profile>
       </div>
       <div class="col-10" *ngIf="!profile" class="offset-1">
-          <p>^ Hello, go to your <b>profile</b>!</p>
+          <login></login>
       </div>
     </div>
   </div>
