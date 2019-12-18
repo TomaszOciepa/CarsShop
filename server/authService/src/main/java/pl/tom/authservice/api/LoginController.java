@@ -23,6 +23,7 @@ public class LoginController {
         this.tokenGenerator = tokenGenerator;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/login")
     public Optional<User> login(@RequestBody User client, HttpServletRequest request, HttpServletResponse response) {
 
