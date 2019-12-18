@@ -8,6 +8,7 @@ import pl.tom.authservice.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Optional;
 
 
@@ -25,7 +26,7 @@ public class LoginController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/login")
-    public Optional<User> login(@RequestBody User client, HttpServletRequest request, HttpServletResponse response) {
+    public Optional<User> login(@RequestBody User client, HttpServletResponse response) throws IOException {
 
 
         if (userService.usernameExists(client)) {
@@ -35,12 +36,12 @@ public class LoginController {
                 Optional<User> credentials = Optional.of(user.get());
                 return credentials;
             } else {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.sendError(403, "Incorrect password");
                 Optional<User> credentials = Optional.empty();
                 return credentials;
             }
         } else {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.sendError(403, "Incorrect login");
             Optional<User> credentials = Optional.empty();
             return credentials;
         }
