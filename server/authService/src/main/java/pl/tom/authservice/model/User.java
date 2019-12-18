@@ -13,6 +13,7 @@ public class User {
     private String username;
     private String password;
     private String role;
+    private String token;
 
     public User() {
     }
@@ -22,10 +23,11 @@ public class User {
         this.password = password;
     }
 
-    public User(String username, String password, String role) {
+    public User(String username, String password, String role, String token) {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.token = token;
     }
 
     public Long getId() {
@@ -60,6 +62,14 @@ public class User {
         this.role = role;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -67,6 +77,8 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
+                ", role='" + role + '\'' +
+                ", token='" + token + '\'' +
                 '}';
     }
 }
