@@ -6,6 +6,8 @@ import pl.tom.authservice.auth.TokenGenerator;
 import pl.tom.authservice.model.User;
 import pl.tom.authservice.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
 
@@ -22,17 +24,24 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User user) {
+    public Optional<User> login(@RequestBody User client, HttpServletRequest request, HttpServletResponse response) {
 
-        if (userService.usernameExists(user)) {
-            Optional<User> credentials = userService.findByUsername(user.getUsername());
-            if (user.getPassword().equals(credentials.get().getPassword())) {
-                return tokenGenerator.get(credentials.get());
+
+        if (userService.usernameExists(client)) {
+            Optional<User> user = userService.findByUsername(client.getUsername());
+            if (client.getPassword().equals(user.get().getPassword())) {
+                user.get().setToken(tokenGenerator.get(user.get()));
+                Optional<User> credentials = Optional.of(user.get());
+                return credentials;
             } else {
-                return "Incorrect password";
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                Optional<User> credentials = Optional.empty();
+                return credentials;
             }
         } else {
-            return "Username not found";
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            Optional<User> credentials = Optional.empty();
+            return credentials;
         }
     }
 
