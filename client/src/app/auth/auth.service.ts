@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 
 interface Credentials{
@@ -18,6 +18,10 @@ export class AuthService {
     this.http.post(this.url, credentials)
       .subscribe(response =>{
         console.log(response)
+      }, error => {
+        if(error instanceof HttpErrorResponse){
+          console.error(error)
+        }
       })
   }
 

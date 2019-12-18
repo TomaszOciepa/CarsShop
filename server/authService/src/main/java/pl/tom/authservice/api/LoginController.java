@@ -35,13 +35,9 @@ public class LoginController {
                 user.get().setToken(tokenGenerator.get(user.get()));
                 Optional<User> credentials = Optional.of(user.get());
                 return credentials;
-            } else {
-                response.sendError(403, "Incorrect password");
-                Optional<User> credentials = Optional.empty();
-                return credentials;
             }
         } else {
-            response.sendError(403, "Incorrect login");
+            response.sendError(403, "Incorrect login or password");
             Optional<User> credentials = Optional.empty();
             return credentials;
         }
