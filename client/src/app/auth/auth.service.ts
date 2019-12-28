@@ -12,8 +12,8 @@ interface Credentials{
 }
 
 interface Session {
-  token: string;
-  user: User
+  token:string;
+  user:User
 }
 
 
@@ -43,25 +43,14 @@ export class AuthService {
     return session && session.user
   }
 
-  // login(credentials:Credentials) {
-  //   this.http.post(this.url, credentials)
-  //     .subscribe((session:Session) =>{
-  //       this.session.next(session)
-  //     }, error => {
-  //       if(error instanceof HttpErrorResponse){
-  //         console.error(error)
-  //       }
-  //     })
-  // }
-
   login(credentials:Credentials) {
     this.http.post(this.url, credentials)
-      .subscribe(response =>{
-        console.log(response) 
-      },error => {
+      .subscribe((session:Session) =>{
+        this.session.next(session)
+      }, error => {
         if(error instanceof HttpErrorResponse){
-                  console.error(error.error)
-                }
+          console.error(error)
+        }
       })
   }
 
