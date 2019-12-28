@@ -3,6 +3,7 @@ package pl.tom.authservice.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.tom.authservice.auth.TokenGenerator;
+import pl.tom.authservice.model.Credentials;
 import pl.tom.authservice.model.User;
 import pl.tom.authservice.service.UserService;
 
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class LoginController {
 
@@ -24,25 +25,23 @@ public class LoginController {
         this.tokenGenerator = tokenGenerator;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
-    @PostMapping("/login")
-    public Optional<User> login(@RequestBody User client, HttpServletResponse response) throws IOException {
 
+    @PostMapping("/login")
+    public Credentials login(@RequestBody User client, HttpServletResponse response) throws IOException {
+        Credentials credentials = new Credentials();
 
         if (userService.usernameExists(client)) {
             Optional<User> user = userService.findByUsername(client.getUsername());
-            if (client.getPassword().equals(user.get().getPassword())) {
-                user.get().setToken(tokenGenerator.get(user.get()));
-                Optional<User> credentials = Optional.of(user.get());
+            if(client.getPassword().equals(user.get().getPassword())) {
+                 credentials.setUser(user.get());
+                 credentials.setToken(tokenGenerator.get(user.get()));
                 return credentials;
             } else {
                 response.sendError(403, "Incorrect login or password");
-                Optional<User> credentials = Optional.empty();
                 return credentials;
             }
         } else {
             response.sendError(403, "Incorrect login or password");
-            Optional<User> credentials = Optional.empty();
             return credentials;
         }
     }

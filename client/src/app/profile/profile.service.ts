@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { City } from './models/city';
-import { Subject } from 'rxjs/internal/Subject';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { ReplaySubject } from 'rxjs/internal/ReplaySubject';
-import { multicast, refCount, share, shareReplay } from 'rxjs/internal/operators';
+import { multicast, refCount, share, shareReplay, filter, map } from 'rxjs/internal/operators';
 import { ConnectableObservable, Observable } from 'rxjs';
+import { User } from './models/user';
+import { AuthService } from '../auth/auth.service';
 
 
 @Injectable({
@@ -13,9 +11,9 @@ import { ConnectableObservable, Observable } from 'rxjs';
 })
 export class ProfileService {
 
-  api_url = 'http://api.openweathermap.org/data/2.5/weather?q=gdansk&units=metric&APPID=58fb0cad9835fc6ae2462d0a0bfa99c5'
+  // api_url = 'http://localhost:8080/user/'
 
-  private city_request:Observable<City>
+  private user_request:Observable<User>
 
   // city_request = this.http.get<City>(this.api_url)
   //   .pipe(
@@ -25,21 +23,22 @@ export class ProfileService {
   //   )
   
 
-  getCity(){
-    if(!this.city_request){
-      this.city_request = this.http.get<City>(this.api_url)
-    .pipe(
-      shareReplay()
-    )
+  getUserProfile(){
+    if(!this.user_request){
+      this.user_request = this.auth.state
+      .pipe(
+        filter(() => this.auth.isAuthenticated),
+        map(() => this.auth.getCurrentUser()),
+      )
     }
-    return this.city_request
+    return this.user_request
   }
 
   clearCache(){
-    this.city_request = null
+    this.user_request = null
   }
 
-  constructor(private http:HttpClient) {}
+  constructor(private http:HttpClient, private auth:AuthService) {}
 
 
 

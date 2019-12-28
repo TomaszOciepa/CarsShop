@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile.service';
-import { City } from '../models/city'
+import { User } from '../models/user';
 
 @Component({
   selector: 'profile-bar',
@@ -9,13 +9,13 @@ import { City } from '../models/city'
 })
 export class ProfileBarComponent implements OnInit {
 
-  profile:City
+  profile:User
 
   constructor(private profileService:ProfileService) { }
 
   ngOnInit() {
-    this.profileService.getCity().subscribe(city =>{
-      this.profile = city
+    this.profileService.getUserProfile().subscribe(user =>{
+      this.profile = user
      }) 
   }
 

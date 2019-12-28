@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile.service';
-import { City } from '../models/city'
+import { User } from '../models/user';
 
 @Component({
   selector: 'profile',
@@ -10,15 +10,16 @@ import { City } from '../models/city'
 export class ProfileComponent implements OnInit {
 
 
-  profile:City
-
+  profile:User
+  
   constructor(private profileService:ProfileService) { }
 
   ngOnInit() {
+    const profile$ = this.profileService.getUserProfile()
 
-    this.profileService.getCity().subscribe(city =>{
-     this.profile = city
-    }) 
+    profile$.subscribe(user =>{
+      this.profile = user
+    })
   }
 
 }
