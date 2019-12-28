@@ -47,6 +47,7 @@ export class AuthService {
     this.http.post(this.url, credentials)
       .subscribe((session:Session) =>{
         this.session.next(session)
+        console.log(this.getToken())
       }, error => {
         if(error instanceof HttpErrorResponse){
           console.error(error)

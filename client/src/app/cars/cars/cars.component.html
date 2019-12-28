@@ -1,0 +1,27 @@
+<div *ngIf="cars">
+    <h2>Cars</h2>
+    <!-- <ul>
+        <li *ngFor="let car of cars">
+          {{ car.mark }}
+        </li>
+      </ul> -->
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Mark</th>
+            <th scope="col">Model</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let car of cars">
+            <th scope="row">{{ car.id }}</th>
+            <td>{{ car.mark }}</td>
+            <td>{{ car.model }}</td>
+            <td>{{ car.price }}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>

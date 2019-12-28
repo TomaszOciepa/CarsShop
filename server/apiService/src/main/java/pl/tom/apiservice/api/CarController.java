@@ -8,7 +8,9 @@ import pl.tom.apiservice.service.CarService;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/car")
 public class CarController {
 
@@ -19,46 +21,47 @@ public class CarController {
         this.carService = carService;
     }
 
+
     @GetMapping("/all")
     public List<Car> getCars() {
         return carService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Car> getById(@PathVariable(value = "id") Long id){
+    public Optional<Car> getById(@PathVariable(value = "id") Long id) {
         return carService.findById(id);
     }
 
     @PostMapping("/")
-    public String create(@RequestBody Car car){
-        if (car.getMark().length() >= 3 && car.getModel().length() >= 2 && car.getPrice() > 0){
+    public String create(@RequestBody Car car) {
+        if (car.getMark().length() >= 3 && car.getModel().length() >= 2 && car.getPrice() > 0) {
             carService.save(car);
             return "create new car";
-        }else {
+        } else {
             return "Wrong data!";
         }
     }
 
     @PutMapping("/{id}")
-    public String update(@PathVariable(value = "id") Long id, @RequestBody Car carUpdate){
+    public String update(@PathVariable(value = "id") Long id, @RequestBody Car carUpdate) {
         Optional<Car> car = carService.findById(id);
-        if (car.isPresent()){
+        if (car.isPresent()) {
             car.get().setMark(carUpdate.getMark());
             car.get().setModel(carUpdate.getModel());
             car.get().setPrice(carUpdate.getPrice());
             carService.save(car.get());
             return "Car is updated";
-        }else {
+        } else {
             return "car does not exist";
         }
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable(value = "id") Long id){
-        if (carService.findById(id).isPresent()){
+    public String delete(@PathVariable(value = "id") Long id) {
+        if (carService.findById(id).isPresent()) {
             carService.deleteById(id);
             return "Car is deleted";
-        }else {
+        } else {
             return "car does not exist";
         }
 

@@ -7,7 +7,6 @@ import pl.tom.authservice.model.Credentials;
 import pl.tom.authservice.model.User;
 import pl.tom.authservice.service.UserService;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;

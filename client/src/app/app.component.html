@@ -12,11 +12,11 @@
                 Profile
               </a>
             </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" (click)="tab = 'todos' ">
-                Todos
+            <li class="nav-item">
+              <a class="nav-link" (click)="tab = 'cars' ">
+                Cars
               </a>
-            </li> -->
+            </li>
         </ul>
       </div>
       <span class="navbar-text"  *ngIf="tab != 'profile'">
@@ -33,9 +33,9 @@
     <div class="col-10 mx-auto" *ngIf="tab == 'profile' ">
       <profile></profile>
     </div>
-    <!-- <div class="col" *ngIf="tab == 'todos'">
-      <todos></todos>
-    </div> -->
+    <div class="col" *ngIf="tab == 'cars' ">
+      <app-cars></app-cars>
+    </div>
   
   </div>
 </div>

@@ -9,12 +9,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.cors().and().csrf().disable()
+                .authorizeRequests()
                 .antMatchers( "/user/*").hasRole("ADMIN")
                 .antMatchers("/car/*").hasRole("ADMIN")
                 .and()
                 .addFilter(new JwtFilter(authenticationManager()));
-
-        http.csrf().disable();
     }
+
+
 }
